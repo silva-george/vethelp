@@ -1,13 +1,15 @@
 import json
-class Recepcionista:
-    def __init__(self, user_id, id, cpf):
-        self.id = user_id
-        self.cpf = cpf
-
+class User:
+    def __init__(self, id, nome, email, fone, senha):
+        self.id = id # atributos de instância
+        self.nome = nome
+        self.email = email
+        self.fone = fone
+        self.senha = senha
     def __str__(self):
-        return f"{self.id}"
+        return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
 
-class Recepcionistas:
+class Users:
     objetos = [] # atributo de classe
     @classmethod
     def inserir(cls, obj):
@@ -53,24 +55,27 @@ class Recepcionistas:
             cls.salvar()        
     @classmethod
     def salvar(cls):
-        # open - cria e abre o arquivo recepcionistas.json
+        # open - cria e abre o arquivo users.json
         # vars - converte um objeto em um dicionário
         # dump - pega a lista de objetos e salva no arquivo
-        with open("recepcionistas.json", mode="w") as arquivo:
+        with open("users.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("recepcionistas.json", mode="r") as arquivo:
-                # abre o arquivo com a lista de dicionários -> recepcionistas_json
-                recepcionistas_json = json.load(arquivo)
+            with open("users.json", mode="r") as arquivo:
+                # abre o arquivo com a lista de dicionários -> users_json
+                users_json = json.load(arquivo)
                 # percorre a lista de dicionários
-                for obj in recepcionistas_json:
+                for obj in users_json:
                     # recupera cada dicionário e cria um objeto
-                    c = Recepcionista(obj["id"], obj["nome"], obj["email"], obj["fone"], obj["senha"])
+                    c = User(obj["id"], obj["nome"], obj["email"], obj["fone"], obj["senha"])
                     # insere o objeto na lista
                     cls.objetos.append(c)    
         except FileNotFoundError:
             pass
+    
+
+

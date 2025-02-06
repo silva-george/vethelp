@@ -1,25 +1,21 @@
 import json
+import user
 class Recepcionista:
-    def __init__(self, id, nome, email, fone, senha):
-        self.id = id # atributos de instância
-        self.nome = nome
-        self.email = email
-        self.fone = fone
-        self.senha = senha
+    def __init__(self, user_id, id, cpf):
+        self.id = user_id
+        self.cpf = cpf
+
     def __str__(self):
-        return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
+        return f"{self.id}"
 
 class Recepcionistas:
     objetos = [] # atributo de classe
     @classmethod
-    def inserir(cls, obj):
+    def inserir(cls, user_id, obj):
         # abre a lista do arquivo
         cls.abrir()
-        # calcula o id do objeto
-        id = 0
-        for x in cls.objetos:
-            if x.id > id: id = x.id
-        obj.id = id + 1    
+        obj.id = user_id
+        #aqui eu de alguma forma devo receber o user cirado e pegar o id dele para igualar com o id de recepcionista.obj
         # insere o objeto na lista
         cls.objetos.append(obj)
         # salva a lista no arquivo
@@ -71,11 +67,8 @@ class Recepcionistas:
                 # percorre a lista de dicionários
                 for obj in recepcionistas_json:
                     # recupera cada dicionário e cria um objeto
-                    c = Recepcionista(obj["id"], obj["nome"], obj["email"], obj["fone"], obj["senha"])
+                    c = Recepcionista(obj["user_id"], obj["id"], obj["cpf"])
                     # insere o objeto na lista
                     cls.objetos.append(c)    
         except FileNotFoundError:
             pass
-    
-
-
