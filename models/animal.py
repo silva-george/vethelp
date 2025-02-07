@@ -1,23 +1,27 @@
 import json
 from models.user import User, Users
-class Recepcionist:
-    def __init__(self, user_id, id, cpf):
+class Animal:
+    def __init__(self, user_id, id, name, race, gender):
+
         self.user_id = user_id
         self.id = user_id
-        self.cpf = cpf
-
+        self.name = name
+        self.race = race
+        self.gender = gender
 
     def __str__(self):
         return f"{self.id}"
 
-class Recepcionists:
+class Animals:
     objetos = [] # atributo de classe
     @classmethod
     def inserir(cls, obj):
         # abre a lista do arquivo
         cls.abrir()
-        #aqui eu de alguma forma devo receber o user cirado e pegar o id dele para igualar com o id de recepcionist.obj
-        # insere o objeto na lista
+        id = 0
+        for x in cls.objetos:
+            if x.id > id: id = x.id
+        obj.id = id + 1 
         cls.objetos.append(obj)
         # salva a lista no arquivo
         cls.salvar()
@@ -52,23 +56,23 @@ class Recepcionists:
             cls.salvar()
     @classmethod
     def salvar(cls):
-        # open - cria e abre o arquivo recepcionists.json
+        # open - cria e abre o arquivo animals.json
         # vars - converte um objeto em um dicionário
         # dump - pega a lista de objetos e salva no arquivo
-        with open("recepcionists.json", mode="w") as arquivo:
+        with open("animals.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("recepcionists.json", mode="r") as arquivo:
-                # abre o arquivo com a lista de dicionários -> recepcionists_json
-                recepcionists_json = json.load(arquivo)
+            with open("animals.json", mode="r") as arquivo:
+                # abre o arquivo com a lista de dicionários -> animals_json
+                animals_json = json.load(arquivo)
                 # percorre a lista de dicionários
-                for obj in recepcionists_json:
+                for obj in animals_json:
                     # recupera cada dicionário e cria um objeto
-                    c = Recepcionist(obj["user_id"], obj["id"], obj["cpf"])
+                    c = Animal(obj["user_id"], obj["id"], obj["name"], obj["race"], obj["gender"])
                     # insere o objeto na lista
                     cls.objetos.append(c)    
         except FileNotFoundError:
