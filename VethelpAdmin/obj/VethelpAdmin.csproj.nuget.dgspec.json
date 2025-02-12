@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/george/IFRN/OOP/projeto/vethelp/VethelpAdmin/VethelpAdmin.csproj": {}
+  },
+  "projects": {
+    "/home/george/IFRN/OOP/projeto/vethelp/VethelpAdmin/VethelpAdmin.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/george/IFRN/OOP/projeto/vethelp/VethelpAdmin/VethelpAdmin.csproj",
+        "projectName": "VethelpAdmin",
+        "projectPath": "/home/george/IFRN/OOP/projeto/vethelp/VethelpAdmin/VethelpAdmin.csproj",
+        "packagesPath": "/home/george/.nuget/packages/",
+        "outputPath": "/home/george/IFRN/OOP/projeto/vethelp/VethelpAdmin/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/george/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.112/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

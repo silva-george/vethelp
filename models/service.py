@@ -1,27 +1,32 @@
 import json
-from models.user import User, Users
-class Animal:
-    def __init__(self, user_id, id, name, race, gender):
 
-        self.user_id = user_id
-        self.id = user_id
-        self.name = name
-        self.race = race
-        self.gender = gender
+class Service:
+    def __init__(self, id, recepcionist_id, vet_id, animal_id, procedure_id, product_id, description, date, status ):
+        self.id = id # atributos de instância
+        self.recepcionist_id = recepcionist_id
+        self.vet_id = vet_id
+        self.animal_id = animal_id
+        self.procedure_id = procedure_id
+        self.product_id = product_id
+        self.description = description
+        self.date = date
+        self.status = status
 
     def __str__(self):
-        return f"{self.id} - {self.name} - {self.race} - {self.gender}"
+        return f"Quantidade: {self.qtd} - Preço R$: {self.preco} - Carrinho: {self.id_venda} - Id Produto: {self.id_produto}"
 
-class Animals:
+class Services:
     objetos = [] # atributo de classe
     @classmethod
     def inserir(cls, obj):
         # abre a lista do arquivo
         cls.abrir()
+        # calcula o id do objeto
         id = 0
         for x in cls.objetos:
             if x.id > id: id = x.id
-        obj.id = id + 1 
+        obj.id = id + 1    
+        # insere o objeto na lista
         cls.objetos.append(obj)
         # salva a lista no arquivo
         cls.salvar()
@@ -30,7 +35,7 @@ class Animals:
         # abre a lista do arquivo
         cls.abrir()
         # retorna a lista para a UI
-        return cls.objetos
+        return cls.objetos[:]
     @classmethod
     def listar_id(cls, id):
         cls.abrir()
@@ -44,10 +49,7 @@ class Animals:
         if x != None:
             cls.objetos.remove(x)
             cls.objetos.append(obj)
-            #x.nome = obj.nome
-            #x.email = obj.email
-            #x.fone = obj.fone
-            cls.salvar()        
+            cls.salvar()
     @classmethod
     def excluir(cls, obj):
         x = cls.listar_id(obj.id)
@@ -56,30 +58,35 @@ class Animals:
             cls.salvar()
     @classmethod
     def salvar(cls):
-        # open - cria e abre o arquivo animals.json
+        # open - cria e abre o arquivo services.json
         # vars - converte um objeto em um dicionário
         # dump - pega a lista de objetos e salva no arquivo
-        with open("animals.json", mode="w") as arquivo:
+        with open("services.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("animals.json", mode="r") as arquivo:
-                # abre o arquivo com a lista de dicionários -> animals_json
-                animals_json = json.load(arquivo)
+            with open("services.json", mode="r") as arquivo:
+                # abre o arquivo com a lista de dicionários -> objetos_json
+                objetos_json = json.load(arquivo)
                 # percorre a lista de dicionários
-                for obj in animals_json:
+                for obj in objetos_json:
                     # recupera cada dicionário e cria um objeto
-                    c = Animal(
-                        obj["user_id"],
+                    c = Service(
                         obj["id"],
-                        obj["name"],
-                        obj["race"],
-                        obj["gender"],
+                        obj["recepcionist_id"],
+                        obj["vet_id"],
+                        obj["animal_id"],
+                        obj["procedure_id"],
+                        obj["product_id"],
+                        obj["description"],
+                        obj["date"],
+                        obj["status"],
                     )
                     # insere o objeto na lista
                     cls.objetos.append(c)    
         except FileNotFoundError:
             pass
+    

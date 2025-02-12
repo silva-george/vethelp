@@ -8,7 +8,7 @@ class Vet:
         self.crm = crm
 
     def __str__(self):
-        return f"{self.id}"
+        return f"{self.id} - {self.cpf} - {self.crm}"
 
 class Vets:
     objetos = [] # atributo de classe

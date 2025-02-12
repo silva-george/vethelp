@@ -8,7 +8,7 @@ class Client:
         self.adress = adress
 
     def __str__(self):
-        return f"{self.id}"
+        return f"{self.id} - {self.cpf} - {self.adress}"
 
 class Clients:
     objetos = [] # atributo de classe
