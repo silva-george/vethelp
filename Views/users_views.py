@@ -1,51 +1,56 @@
-
 from models.user import User, Users
-from models.receptionist import Recepcionist, Recepcionists
-from models.vet import Vet, Vets
-from models.cilent import Client, Clients
-from models.animal import Animal, Animals
 
-def main():
-    c = User(1, "João", "j@j.com", "123", "123")
-    Users.inserir(c)
-    r = Recepcionist(c.id, c.id, "cpf12356")
-    Recepcionists.inserir(r)
-
-    lista = Recepcionists.listar()
-    print("recepcionists: ",*lista)
-
-    por_id = Recepcionists.listar_id(5)
-    print(por_id)
+@staticmethod
+def user_auth(email, password):
+    for u in Users.listar():
+        if u.email == email and u.senha == password:
+            u = { "id" : u.id, "nome" : u.nome, "email" : u.email, "fone" : u.fone, "user_type" : u.user_type }
+            return u
+    return None
 
 
-    v = User(1, "Vwt", "vet@vet.com", "1233232", "123456")
-    Users.inserir(v)
-    vet = Vet(v.id, v.id, "123456", "crm123456")
-    Vets.inserir(vet)
+@staticmethod
+def admin_create():
+    if not Users.listar():
+        c = User(1, "Admin", "admin", "123", "123", "admin")
+        Users.inserir(c)
+@staticmethod
+def user_list():
+    return Users.listar()
 
-    lista = Vets.listar()
-    print("vets: ",*lista)
+@staticmethod
+def user_list_id(id):
+    return Users.listar_id(id)
 
-    por_id = Vets.listar_id(1)
-    print(por_id)
+@staticmethod
+def user_register(name, email, phone, password, user_type ):
+    c = User(0, name, email, phone, password, user_type)
 
+    return Users.inserir(c)
 
-    a = User(1, "cliente", "j@j.com", "123", "123")
-    Users.inserir(a)
-    client = Client(a.id, a.id, "123456", "rua do bolo, 0")
-    Clients.inserir(client)
+@staticmethod
+def user_edit(id, instance):
+    c = User(id, instance)
+    Users.atualizar(c)
 
-    lista = Clients.listar()
-    print("clients: ",*lista)
-
-    clinet_id = Clients.listar_id(1)
-    print(clinet_id)
-
-    animal = Animal(clinet_id, 1, "animal", "race", "gender")
-    Animals.inserir(animal)
-
-    lista = Animals.listar()
-    print("animais: ",*lista)
+@staticmethod
+def user_delete(id):
+    c = User(id, "")
+    Users.excluir(c)
 
 
-main()
+def get_user_name(id):
+    u = Users.listar_id(id)
+    return u.nome
+
+def get_user_email(id):
+    u = Users.listar_id(id)
+    return u.email
+
+
+def get_user_fone(id):
+    u = Users.listar_id(id)
+    return u.fone
+def get_user_type(id):
+    u = Users.listar_id(id)
+    return u.user_type
