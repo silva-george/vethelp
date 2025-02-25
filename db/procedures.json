@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Vaccination",
+        "description": "Vaccine application",
+        "price": 50.0
+    },
+    {
+        "id": 2,
+        "name": "Castration Male Cat",
+        "description": "Castration for male cat of any age",
+        "price": 100.0
+    },
+    {
+        "id": 3,
+        "name": "Castration Female Cat",
+        "description": "Castration for female cat of any age",
+        "price": 100.0
+    },
+    {
+        "id": 4,
+        "name": "Castration Male Dog",
+        "description": "Castration for male dog of any age",
+        "price": 100.0
+    },
+    {
+        "id": 5,
+        "name": "Castration Female Dog",
+        "description": "Castration for female dog of any age",
+        "price": 100.0
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Vaccine V10",
+        "description": "Vaccine for small animal",
+        "price": 45.0,
+        "stock": 10
+    },
+    {
+        "id": 2,
+        "name": "Vaccine Aint-Rabies",
+        "description": "Vaccine against rabies",
+        "price": 50.0,
+        "stock": 10
+    },
+    {
+        "id": 3,
+        "name": "Vermifuge P",
+        "description": "Vermifuge for small animal",
+        "price": 30.0,
+        "stock": 10
+    },
+    {
+        "id": 4,
+        "name": "Vermifuge M",
+        "description": "Vermifuge for medium animals",
+        "price": 60.0,
+        "stock": 10
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nome": "Admin",
+        "email": "admin",
+        "fone": "123",
+        "senha": "123",
+        "user_type": "admin"
+    },
+    {
+        "id": 2,
+        "nome": "Receptionist test",
+        "email": "receptionist",
+        "fone": "84998989898",
+        "senha": "",
+        "user_type": "receptionist"
+    },
+    {
+        "id": 3,
+        "nome": "Vet test",
+        "email": "vet",
+        "fone": "84848484",
+        "senha": "",
+        "user_type": "vet"
+    },
+    {
+        "id": 4,
+        "nome": "CLient test",
+        "email": "client",
+        "fone": "84848484",
+        "senha": null,
+        "user_type": "client"
+    },
+    {
+        "id": 5,
+        "nome": "Client 2 test",
+        "email": "client2",
+        "fone": "84998989898",
+        "senha": null,
+        "user_type": "client"
+    }
+]
