@@ -1,10 +1,10 @@
 import json
-from models.user import User, Users
+
 class Animal:
     def __init__(self, user_id, id, name, race, gender):
 
         self.user_id = user_id
-        self.id = user_id
+        self.id = id
         self.name = name
         self.race = race
         self.gender = gender
@@ -39,6 +39,17 @@ class Animals:
             if x.id == id: return x
         return None
     @classmethod
+    def listar_user_id(cls, user_id):
+        animals=[]
+        cls.abrir()
+        # percorre a lista procurando o id    
+        for x in cls.objetos:
+            if x.user_id == user_id: 
+                animals.append(x)
+        if animals[0] != None:
+            return animals
+        return None
+    @classmethod
     def atualizar(cls, obj):
         x = cls.listar_id(obj.id)
         if x != None:
@@ -59,14 +70,14 @@ class Animals:
         # open - cria e abre o arquivo animals.json
         # vars - converte um objeto em um dicionário
         # dump - pega a lista de objetos e salva no arquivo
-        with open("animals.json", mode="w") as arquivo:
+        with open("/vethelp/db/animals.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("animals.json", mode="r") as arquivo:
+            with open("/vethelp/db/animals.json", mode="r") as arquivo:
                 # abre o arquivo com a lista de dicionários -> animals_json
                 animals_json = json.load(arquivo)
                 # percorre a lista de dicionários

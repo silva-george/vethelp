@@ -1,12 +1,11 @@
 import json
-from models.user import User, Users
+
 class Client:
     def __init__(self, user_id, id, cpf, adress):
         self.user_id = user_id
         self.id = user_id
         self.cpf = cpf
         self.adress = adress
-
     def __str__(self):
         return f"{self.id} - {self.cpf} - {self.adress}"
 
@@ -55,14 +54,14 @@ class Clients:
         # open - cria e abre o arquivo clients.json
         # vars - converte um objeto em um dicionário
         # dump - pega a lista de objetos e salva no arquivo
-        with open("clients.json", mode="w") as arquivo:
+        with open("/vethelp/db/clients.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("clients.json", mode="r") as arquivo:
+            with open("/vethelp/db/clients.json", mode="r") as arquivo:
                 # abre o arquivo com a lista de dicionários -> clients_json
                 clients_json = json.load(arquivo)
                 # percorre a lista de dicionários

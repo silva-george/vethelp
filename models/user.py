@@ -1,13 +1,14 @@
 import json
 class User:
-    def __init__(self, id, nome, email, fone, senha):
+    def __init__(self, id, nome, email, fone, senha, user_type = None):
         self.id = id # atributos de instância
         self.nome = nome
         self.email = email
         self.fone = fone
         self.senha = senha
+        self.user_type = user_type
     def __str__(self):
-        return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
+        return f" ID: {self.id} - Nome: {self.nome} - Email {self.email} - Fone {self.fone} - Cargo {self.user_type}"
 
 class Users:
     objetos = [] # atributo de classe
@@ -24,6 +25,7 @@ class Users:
         cls.objetos.append(obj)
         # salva a lista no arquivo
         cls.salvar()
+        return obj
     @classmethod
     def listar(cls):
         # abre a lista do arquivo
@@ -55,23 +57,27 @@ class Users:
             cls.salvar()        
     @classmethod
     def salvar(cls):
-        # open - cria e abre o arquivo users.json
-        # vars - converte um objeto em um dicionário
-        # dump - pega a lista de objetos e salva no arquivo
-        with open("users.json", mode="w") as arquivo:
+        with open("/vethelp/db/users.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("users.json", mode="r") as arquivo:
+            with open("/vethelp/db/users.json", mode="r") as arquivo:
                 # abre o arquivo com a lista de dicionários -> users_json
                 users_json = json.load(arquivo)
                 # percorre a lista de dicionários
                 for obj in users_json:
                     # recupera cada dicionário e cria um objeto
-                    c = User(obj["id"], obj["nome"], obj["email"], obj["fone"], obj["senha"])
+                    c = User(
+                        obj["id"],
+                        obj["nome"],
+                        obj["email"],
+                        obj["fone"],
+                        obj["senha"],
+                        obj["user_type"],
+                    )
                     # insere o objeto na lista
                     cls.objetos.append(c)    
         except FileNotFoundError:

@@ -1,14 +1,13 @@
 import json
-from models.user import User, Users
 class Vet:
     def __init__(self, user_id, id, cpf, crm):
-        self.user_id = user_id
+        self.userId = user_id
         self.id = user_id
         self.cpf = cpf
         self.crm = crm
 
     def __str__(self):
-        return f"{self.id} - {self.cpf} - {self.crm}"
+        return f"User id : {self.userId} - ID: {self.id} - CPF {self.cpf} - CRM {self.crm}"
 
 class Vets:
     objetos = [] # atributo de classe
@@ -21,6 +20,7 @@ class Vets:
         cls.objetos.append(obj)
         # salva a lista no arquivo
         cls.salvar()
+        return obj
     @classmethod
     def listar(cls):
         # abre a lista do arquivo
@@ -55,20 +55,20 @@ class Vets:
         # open - cria e abre o arquivo vets.json
         # vars - converte um objeto em um dicionário
         # dump - pega a lista de objetos e salva no arquivo
-        with open("vets.json", mode="w") as arquivo:
+        with open("/vethelp/db/vets.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("vets.json", mode="r") as arquivo:
+            with open("/vethelp/db/vets.json", mode="r") as arquivo:
                 # abre o arquivo com a lista de dicionários -> vets_json
                 vets_json = json.load(arquivo)
                 # percorre a lista de dicionários
                 for obj in vets_json:
                     # recupera cada dicionário e cria um objeto
-                    c = Vet(obj["user_id"], obj["id"], obj["cpf"], obj["crm"])
+                    c = Vet(obj["userId"], obj["id"], obj["cpf"], obj["crm"])
                     # insere o objeto na lista
                     cls.objetos.append(c)    
         except FileNotFoundError:

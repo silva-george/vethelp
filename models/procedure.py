@@ -48,7 +48,7 @@ class Procedures:
         x = cls.listar_id(obj.id)
         if x != None:
             cls.objetos.remove(x)
-            cls.salvar()        
+            cls.salvar()    
     @classmethod
     def detalhes(cls, id):
         x = cls.listar_id(id)
@@ -59,20 +59,20 @@ class Procedures:
         # open - cria e abre o arquivo clientes.json
         # vars - converte um objeto em um dicionário
         # dump - pega a lista de objetos e salva no arquivo
-        with open("procedures.json", mode="w") as arquivo:
+        with open("/vethelp/db/procedures.json", mode="w") as arquivo:
             json.dump(cls.objetos, arquivo, default = vars)
     @classmethod
     def abrir(cls):
         # esvazia a lista de objetos
         cls.objetos = []
         try:
-            with open("procedures.json", mode="r") as arquivo:
+            with open("/vethelp/db/procedures.json", mode="r") as arquivo:
                 # abre o arquivo com a lista de dicionários -> clientes_json
                 objetos_json = json.load(arquivo)
                 # percorre a lista de dicionários
                 for obj in objetos_json:
                     # recupera cada dicionário e cria um objeto
-                    c = Procedure(obj["id"], obj["name"], obj["price"], obj["description"])
+                    c = Procedure(obj["id"], obj["name"], obj["description"], obj["price"])
                     # insere o objeto na lista
                     cls.objetos.append(c)    
         except FileNotFoundError:
